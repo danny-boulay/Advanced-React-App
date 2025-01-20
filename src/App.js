@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <div>
+      <div >
         <h1>Low Calorie Desserts</h1>
         <DessertsList/>
       </div>

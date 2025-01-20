@@ -64,5 +64,59 @@
     "name": "Pudding",
     "calories": 90,
     "createdAt": "2025-01-20T18:03:13.976Z"
+  },
+  {
+    "id": 1737403814616,
+    "name": "Chocolate Donut",
+    "calories": 210,
+    "createdAt": "2025-01-20T20:10:14.616Z"
+  },
+  {
+    "id": 1737404250782,
+    "name": "Lemon Pie",
+    "calories": 330,
+    "createdAt": "2025-01-20T20:17:30.782Z"
+  },
+  {
+    "id": 1737404294212,
+    "name": "Strawberry Donut",
+    "calories": 205,
+    "createdAt": "2025-01-20T20:18:14.212Z"
+  },
+  {
+    "id": 1737404347463,
+    "name": "Blueberry Donut",
+    "calories": 175,
+    "createdAt": "2025-01-20T20:19:07.463Z"
+  },
+  {
+    "id": 1737404772781,
+    "name": "Vanilla Ice Cream",
+    "calories": 70,
+    "createdAt": "2025-01-20T20:26:12.781Z"
+  },
+  {
+    "id": 1737405003003,
+    "name": "Matcha Ice Cream",
+    "calories": 60,
+    "createdAt": "2025-01-20T20:30:03.003Z"
+  },
+  {
+    "id": 1737405067290,
+    "name": "Latte Ice Cream",
+    "calories": 105,
+    "createdAt": "2025-01-20T20:31:07.290Z"
+  },
+  {
+    "id": 1737405118503,
+    "name": "Dark Chocolate",
+    "calories": 220,
+    "createdAt": "2025-01-20T20:31:58.503Z"
+  },
+  {
+    "id": 1737405415671,
+    "name": "Carrot Muffin",
+    "calories": 55,
+    "createdAt": "2025-01-20T20:36:55.671Z"
   }
 ]

@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useRef, useEffect, useState} from "react";
 
 function DessertsList() {
     const [desserts, setDesserts] = useState([]); // État pour stocker la liste des desserts récupérés depuis le serveur
     const [newDessert, setNewDessert] = useState({name:"", calories: ""}); // État pour gérer les valeurs du formulaire (nom et calories du nouveau dessert)
+    const scrollRef = useRef(null); // Ref pour accéder au composant de scroll
 
     // ** Chargement initial des desserts ** (Effet exécuté une seule fois au montage du composant)
     useEffect(() => {
@@ -11,7 +12,7 @@ function DessertsList() {
             .then((data) => setDesserts(data)) // Mise à jour de l'état local avec les desserts récupérés
             .catch((err) => console.error("Erreur lors du chargement des desserts :", err));
     }, []); // Le tableau vide signifie que cet effet s'exécute uniquement au premier rendu
-    
+
     //Gérer les changements dans les inputs
     const handleInputChange = (e) => {
         const {name,value} = e.target; // Récupération du nom de l'input (name) et de sa valeur
@@ -36,6 +37,9 @@ function DessertsList() {
     };
     console.log("Nouveau dessert :", newDessertEntry);
 
+    // Scroll to the ref before sending the request
+    //scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    
     // Envoi du dessert au serveur via une requête POST
     fetch("http://localhost:3001/api/desserts", {
         method: "POST", // Type de requête (ajout)
@@ -62,7 +66,7 @@ function DessertsList() {
 
     // Générer une liste d'éléments <li> pour chaque dessert trié
     return (
-        <div>
+        <div >
           <h1>Liste de Desserts</h1>
           {/* Formulaire pour ajouter un dessert */}
           <form onSubmit={handleAddDessert}>
@@ -84,7 +88,7 @@ function DessertsList() {
           </form>
     
           {/* Liste des desserts triés */}
-          <ul>
+          <ul ref={scrollRef}>
             {dessertSorted.map((dessert) => (
               <li key={dessert.id}>
                 {dessert.name} - {dessert.calories} cal (Ajouté le :{" "}
