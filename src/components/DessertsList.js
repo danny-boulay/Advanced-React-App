@@ -58,6 +58,16 @@ function DessertsList() {
     .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
     };
 
+    // Utilisation de requestAnimationFrame pour assurer le rendu complet avant de défiler
+    useEffect(() => {
+      if (desserts.length > 0 && scrollRef.current) {
+          // Attendre le prochain rafraîchissement de l'écran pour lancer le scroll
+          requestAnimationFrame(() => {
+              scrollRef.current.scrollIntoView({ behavior: 'auto' });
+          });
+      }
+  }, [desserts]); // Ce useEffect se déclenche lorsque la liste des desserts est mise à jour
+  
     //Trier les desserts avec moins de 500 calories
     const dessertLessThan500 = desserts.filter((dessert) => dessert.calories < 500 );
   
@@ -66,7 +76,7 @@ function DessertsList() {
 
     // Générer une liste d'éléments <li> pour chaque dessert trié
     return (
-        <div >
+        <div className="DessertsList">
           <h1>Liste de Desserts</h1>
           {/* Formulaire pour ajouter un dessert */}
           <form onSubmit={handleAddDessert}>

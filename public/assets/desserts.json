@@ -118,5 +118,47 @@
     "name": "Carrot Muffin",
     "calories": 55,
     "createdAt": "2025-01-20T20:36:55.671Z"
+  },
+  {
+    "id": 1737407088583,
+    "name": "Chocolate Pie",
+    "calories": 470,
+    "createdAt": "2025-01-20T21:04:48.583Z"
+  },
+  {
+    "id": 1737407137657,
+    "name": "Oat Cookie",
+    "calories": 130,
+    "createdAt": "2025-01-20T21:05:37.657Z"
+  },
+  {
+    "id": 1737407257748,
+    "name": "Blueberry Muffin",
+    "calories": 155,
+    "createdAt": "2025-01-20T21:07:37.748Z"
+  },
+  {
+    "id": 1737407354531,
+    "name": "Classic Muffin",
+    "calories": 80,
+    "createdAt": "2025-01-20T21:09:14.531Z"
+  },
+  {
+    "id": 1737407432236,
+    "name": "Strawberry Muffin",
+    "calories": 140,
+    "createdAt": "2025-01-20T21:10:32.236Z"
+  },
+  {
+    "id": 1737407465802,
+    "name": "Muffin",
+    "calories": 100,
+    "createdAt": "2025-01-20T21:11:05.802Z"
+  },
+  {
+    "id": 1737407963755,
+    "name": "Cookie with nuts",
+    "calories": 195,
+    "createdAt": "2025-01-20T21:19:23.755Z"
   }
 ]
