@@ -160,5 +160,11 @@
     "name": "Cookie with nuts",
     "calories": 195,
     "createdAt": "2025-01-20T21:19:23.755Z"
+  },
+  {
+    "id": 1737729275738,
+    "name": "Brownies",
+    "calories": 490,
+    "createdAt": "2025-01-24T14:34:35.738Z"
   }
 ]

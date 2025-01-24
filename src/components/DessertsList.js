@@ -1,9 +1,8 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 function DessertsList() {
     const [desserts, setDesserts] = useState([]); // État pour stocker la liste des desserts récupérés depuis le serveur
     const [newDessert, setNewDessert] = useState({name:"", calories: ""}); // État pour gérer les valeurs du formulaire (nom et calories du nouveau dessert)
-    const scrollRef = useRef(null); // Ref pour accéder au composant de scroll
 
     // ** Chargement initial des desserts ** (Effet exécuté une seule fois au montage du composant)
     useEffect(() => {
@@ -50,7 +49,6 @@ function DessertsList() {
         if (res.ok) {
           console.log("Dessert ajouté avec succès !");
           setDesserts([...desserts, newDessertEntry]); // Ajoute le nouveau dessert à la liste locale (sans recharger depuis le serveur)
-          setNewDessert({ name: "", calories: "" });   // Réinitialise les champs du formulaire
         }  else {
           console.error("Erreur lors de l'ajout du dessert :", res.status);
         }
@@ -58,16 +56,6 @@ function DessertsList() {
     .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
     };
 
-    // Utilisation de requestAnimationFrame pour assurer le rendu complet avant de défiler
-    useEffect(() => {
-      if (desserts.length > 0 && scrollRef.current) {
-          // Attendre le prochain rafraîchissement de l'écran pour lancer le scroll
-          requestAnimationFrame(() => {
-              scrollRef.current.scrollIntoView({ behavior: 'auto' });
-          });
-      }
-  }, [desserts]); // Ce useEffect se déclenche lorsque la liste des desserts est mise à jour
-  
     //Trier les desserts avec moins de 500 calories
     const dessertLessThan500 = desserts.filter((dessert) => dessert.calories < 500 );
   
@@ -77,7 +65,7 @@ function DessertsList() {
     // Générer une liste d'éléments <li> pour chaque dessert trié
     return (
         <div className="DessertsList">
-          <h1>Liste de Desserts</h1>
+          <h1>Liste de Desserts avec peu de calories</h1>
           {/* Formulaire pour ajouter un dessert */}
           <form onSubmit={handleAddDessert}>
             <input
@@ -94,11 +82,11 @@ function DessertsList() {
               value={newDessert.calories}
               onChange={handleInputChange}
             />
-            <button type="submit">Ajouter Dessert</button>
+            <button disabled={!newDessert.name || !newDessert.calories} type="submit">Ajouter Dessert</button>
           </form>
-    
+  
           {/* Liste des desserts triés */}
-          <ul ref={scrollRef}>
+          <ul>
             {dessertSorted.map((dessert) => (
               <li key={dessert.id}>
                 {dessert.name} - {dessert.calories} cal (Ajouté le :{" "}

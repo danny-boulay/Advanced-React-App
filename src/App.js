@@ -8,9 +8,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>Welcome to React</h1>
       </header>
       <div >
-        <h1>Low Calorie Desserts</h1>
         <DessertsList/>
       </div>
     </div>

@@ -8,12 +8,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 /* Logo */
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
-  margin: 20px;
+  position: absolute;
+  left: 20px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -25,14 +25,14 @@
 /* Header */
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 20px;
+  text-align: center;
 }
 
 /* Link */
@@ -49,11 +49,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-/* Add some spacing between elements */
-.App-header > * {
-  margin-bottom: 20px;
 }
 
 .DessertsList {
