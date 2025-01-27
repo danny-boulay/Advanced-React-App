@@ -166,5 +166,11 @@
     "name": "Brownies",
     "calories": 490,
     "createdAt": "2025-01-24T14:34:35.738Z"
+  },
+  {
+    "id": 1737997898925,
+    "name": "Double Chocolate Muffin",
+    "calories": 380,
+    "createdAt": "2025-01-27T17:11:38.925Z"
   }
 ]

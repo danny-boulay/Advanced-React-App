@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 
 function DessertsList() {
-    const [desserts, setDesserts] = useState([]); // État pour stocker la liste des desserts récupérés depuis le serveur
-    const [newDessert, setNewDessert] = useState({name:"", calories: ""}); // État pour gérer les valeurs du formulaire (nom et calories du nouveau dessert)
+    const [desserts, setDesserts] = useState([]); // Hook pour stocker la liste des desserts récupérés depuis le serveur
+    const [newDessert, setNewDessert] = useState({name:"", calories: ""}); // Hook pour gérer les valeurs du formulaire (nom et calories du nouveau dessert)
 
     // ** Chargement initial des desserts ** (Effet exécuté une seule fois au montage du composant)
     useEffect(() => {
@@ -20,11 +20,11 @@ function DessertsList() {
 
     // Ajouter un nouveau dessert à la liste
     const handleAddDessert = (e) => {
-        e.preventDefault(); // Empêche le rafraîchissement de la page
+      e.preventDefault(); // Empêche le rafraîchissement de la page
 
-    if (!newDessert.name || !newDessert.calories) {
-        alert("Veuillez remplir tous les champs !");
-        return;
+      if (!newDessert.name || !newDessert.calories) {
+          alert("Veuillez remplir tous les champs !");
+          return;
     }
 
     // Création d'un nouvel objet dessert à ajouter
@@ -45,19 +45,20 @@ function DessertsList() {
         headers: { "Content-Type": "application/json" },  // Spécifie le format des données envoyées
         body: JSON.stringify(newDessertEntry), // Convertit l'objet en texte JSON
     })
-    .then((res) => {
-        if (res.ok) {
-          console.log("Dessert ajouté avec succès !");
-          setDesserts([...desserts, newDessertEntry]); // Ajoute le nouveau dessert à la liste locale (sans recharger depuis le serveur)
-        }  else {
-          console.error("Erreur lors de l'ajout du dessert :", res.status);
-        }
-    })
-    .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
+      .then((res) => {
+          if (res.ok) {
+            console.log("Dessert ajouté avec succès !");
+            setDesserts([...desserts, newDessertEntry]); // Ajoute le nouveau dessert à la liste locale (sans recharger depuis le serveur)
+          }  else {
+            console.error("Erreur lors de l'ajout du dessert :", res.status);
+          }
+      })
+      .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
     };
 
     //Trier les desserts avec moins de 500 calories
-    const dessertLessThan500 = desserts.filter((dessert) => dessert.calories < 500 );
+    let calories = 500; //stock dans une variable si jamais je veux changer la valeur
+    const dessertLessThan500 = desserts.filter((dessert) => dessert.calories < calories );
   
     //Trier en ordre croissant de calories
     const dessertSorted = dessertLessThan500.sort((a,b) => a.calories - b.calories);
@@ -65,7 +66,7 @@ function DessertsList() {
     // Générer une liste d'éléments <li> pour chaque dessert trié
     return (
         <div className="DessertsList">
-          <h1>Liste de Desserts avec peu de calories</h1>
+          <h1>Liste de Desserts avec peu de calories (less than {calories})</h1>
           {/* Formulaire pour ajouter un dessert */}
           <form onSubmit={handleAddDessert}>
             <input
