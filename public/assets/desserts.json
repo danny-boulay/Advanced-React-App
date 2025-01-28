@@ -172,5 +172,11 @@
     "name": "Double Chocolate Muffin",
     "calories": 380,
     "createdAt": "2025-01-27T17:11:38.925Z"
+  },
+  {
+    "id": 1738080964604,
+    "name": "Pistachios Ice Cream",
+    "calories": 100,
+    "createdAt": "2025-01-28T16:16:04.604Z"
   }
 ]

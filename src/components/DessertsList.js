@@ -21,39 +21,25 @@ function DessertsList() {
     // Ajouter un nouveau dessert à la liste
     const handleAddDessert = (e) => {
       e.preventDefault(); // Empêche le rafraîchissement de la page
-
-      if (!newDessert.name || !newDessert.calories) {
-          alert("Veuillez remplir tous les champs !");
-          return;
-    }
-
-    // Création d'un nouvel objet dessert à ajouter
-    const newDessertEntry = {
-        id: Date.now(), // Utilisation de l'heure actuelle comme ID unique
-        name: newDessert.name,
-        calories: parseInt(newDessert.calories, 10), // Conversion en entier
-        createdAt: new Date().toISOString(), // Date de création au format ISO
-    };
-    console.log("Nouveau dessert :", newDessertEntry);
-
-    // Scroll to the ref before sending the request
-    //scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     
-    // Envoi du dessert au serveur via une requête POST
-    fetch("http://localhost:3001/api/desserts", {
-        method: "POST", // Type de requête (ajout)
-        headers: { "Content-Type": "application/json" },  // Spécifie le format des données envoyées
-        body: JSON.stringify(newDessertEntry), // Convertit l'objet en texte JSON
-    })
-      .then((res) => {
-          if (res.ok) {
-            console.log("Dessert ajouté avec succès !");
-            setDesserts([...desserts, newDessertEntry]); // Ajoute le nouveau dessert à la liste locale (sans recharger depuis le serveur)
-          }  else {
-            console.error("Erreur lors de l'ajout du dessert :", res.status);
-          }
-      })
-      .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
+      // Création d'un nouvel objet dessert à ajouter
+      const newDessertEntry = {
+          id: Date.now(), // Utilisation de l'heure actuelle comme ID unique
+          name: newDessert.name,
+          calories: parseInt(newDessert.calories, 10), // Conversion en entier
+          createdAt: new Date().toISOString(), // Date de création au format ISO
+      };
+    
+      // Envoi du dessert au serveur via une requête POST
+      fetch("http://localhost:3001/api/desserts", {
+          method: "POST", // Type de requête (ajout)
+          headers: { "Content-Type": "application/json" },  // Spécifie le format des données envoyées
+          body: JSON.stringify(newDessertEntry), // Convertit l'objet en texte JSON
+        })
+        .then((res) => {
+            if (res.ok) setDesserts([...desserts, newDessertEntry]); // Ajoute le nouveau dessert à la liste locale (sans recharger depuis le serveur)
+        })
+        .catch((err) => console.error("Erreur lors de l'ajout du dessert :", err));
     };
 
     //Trier les desserts avec moins de 500 calories
@@ -66,7 +52,7 @@ function DessertsList() {
     // Générer une liste d'éléments <li> pour chaque dessert trié
     return (
         <div className="DessertsList">
-          <h1>Liste de Desserts avec peu de calories (less than {calories})</h1>
+          <h1>Liste de desserts avec peu de calories (less than {calories})</h1>
           {/* Formulaire pour ajouter un dessert */}
           <form onSubmit={handleAddDessert}>
             <input

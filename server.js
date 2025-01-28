@@ -5,7 +5,7 @@ const cors = require("cors"); // Importation de CORS pour autoriser les requête
 
 // Autoriser uniquement les requêtes venant de localhost:3000 (ton frontend React)
 app.use(cors({
-  origin: "http://localhost:3000"  // Change cette URL si nécessaire
+  origin: "http://localhost:3000"  // Peut changer l'URL si nécessaire
 }));
 
 // Définition du port sur lequel le serveur va écouter (3001)
@@ -14,19 +14,15 @@ const PORT = 3001;
 // Middleware pour parser le JSON (Cela permet à Express de comprendre les données envoyées au format JSON dans les requêtes POST/PUT)
 app.use(express.json());
 
-// Chemin vers le fichier JSON contenant les desserts
+// Chemin vers les fichiers JSON
 const path = require("path");
-const filePath = path.join(__dirname, "public", "assets", "desserts.json");
+const dessertsFilePath = path.join(__dirname, "public", "assets", "desserts.json");
+const moneyFilePath = path.join(__dirname, "public", "assets", "money.json");
 
 // Route **GET** pour récupérer les desserts
 app.get("/api/desserts", (req, res) => {
-  // Lecture du fichier contenant les desserts
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      // Retourner une réponse avec le code d'erreur 500 (erreur serveur)
-      return res.status(500).send("Erreur lors de la lecture des desserts.");
-    }
-    // Si tout va bien, envoyer les données au format JSON au client
+  fs.readFile(dessertsFilePath, "utf8", (err, data) => {
+    if (err) return res.status(500).send("Erreur lors de la lecture des desserts.");
     res.json(JSON.parse(data)); // `JSON.parse` convertit le texte en objet JavaScript
   });
 });
@@ -35,14 +31,10 @@ app.get("/api/desserts", (req, res) => {
 app.post("/api/desserts", (req, res) => {
   // Le nouveau dessert est envoyé dans le corps de la requête (req.body)
   const newDessert = req.body;
-  console.log("Données reçues :", newDessert); // Log les données reçues
 
   // Lecture de la liste existante des desserts dans le fichier JSON
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Erreur de lecture :", err);
-      return res.status(500).send("Erreur lors de la lecture des desserts.");
-    }
+  fs.readFile(dessertsFilePath, "utf8", (err, data) => {
+    if (err) return res.status(500).send("Erreur lors de la lecture des desserts.");
 
     // Conversion des données du fichier JSON en tableau d'objets JavaScript
     const desserts = JSON.parse(data);
@@ -51,16 +43,43 @@ app.post("/api/desserts", (req, res) => {
     desserts.push(newDessert);
 
     // Écriture du tableau mis à jour dans le fichier JSON
-    fs.writeFile(filePath, JSON.stringify(desserts, null, 2), (err) => {
-      if (err) {
-        console.error("Erreur d'écriture :", err);
-        return res.status(500).send("Erreur lors de l'écriture des desserts.");
-      }
-      console.log("Dessert ajouté :", newDessert);
+    fs.writeFile(dessertsFilePath, JSON.stringify(desserts, null, 2), (err) => {
+      if (err) return res.status(500).send("Erreur lors de l'écriture des desserts.");
       res.status(201).send("Dessert ajouté !");
     });
   });
 });
+
+// Route **GET** pour récupérer la monnaie
+app.get("/api/money", (req, res) => {
+  fs.readFile(moneyFilePath, "utf8", (err, data) => {
+    if (err) return res.status(500).send("Erreur lors de la lecture de la monnaie.");
+    res.json(JSON.parse(data)); // `JSON.parse` convertit le texte en objet JavaScript
+  });
+});
+
+//Route **POST** pour mettre à jour la monnaie
+app.post("/api/money", (req, res) => {
+  // La nouvelle monnaie est envoyé dans le corps de la requête (req.body)
+  const newMoney = req.body;
+
+  // Lecture de la monnaie existante dans le fichier JSON
+  fs.readFile(moneyFilePath, "utf8", (err, data) => {
+    if (err) return res.status(500).send("Erreur lors de la lecture de la monnaie.");
+
+    // Conversion des données du fichier JSON en objet JavaScript
+    const money = JSON.parse(data);
+
+    // Mise à jour de la monnaie
+    money.money = newMoney.money;
+
+    //Écriture de la monnaie mise à jour dans le fichier JSON
+    fs.writeFile(moneyFilePath, JSON.stringify(money, null, 2), (err) => {
+      if (err) return res.status(500).send("Erreur lors de l'écriture de la monnaie.");
+      res.status(201).send("Monnaie mise à jour !");
+    })
+  })
+})
 
 // Démarrage du serveur sur le port spécifié
 app.listen(PORT, () => {
