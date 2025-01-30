@@ -18,6 +18,7 @@ app.use(express.json());
 const path = require("path");
 const dessertsFilePath = path.join(__dirname, "public", "assets", "desserts.json");
 const moneyFilePath = path.join(__dirname, "public", "assets", "money.json");
+const usernameFilePath = path.join(__dirname, "public", "assets", "username.json");
 
 // Route **GET** pour récupérer les desserts
 app.get("/api/desserts", (req, res) => {
@@ -80,6 +81,31 @@ app.post("/api/money", (req, res) => {
     })
   })
 })
+
+// Route **POST** pour ajouter un utilisateur à la newsletter
+app.post('/api/newsletter', async (req, res) => {
+  const newUser = req.body;
+
+  fs.readFile(usernameFilePath, "utf8", (err, data) => {
+    if (err) return res.status(500).send("Erreur lors de la lecture des utilisateurs.");
+    usernames = JSON.parse(data);
+    
+    // Vérifier si l'email existe déjà avant d'ajouter l'utilisateur
+    if (usernames.some(user => user.email === newUser.email)) {
+      console.log('Email existe déjà ?', true);  // Log pour débogage
+      return res.status(409).json({ message: "Cet email est déjà inscrit" });
+    }
+
+    usernames.push(newUser);
+
+    // Écriture du tableau mis à jour dans le fichier JSON
+    fs.writeFile(usernameFilePath, JSON.stringify(usernames, null, 2), (err) => {
+      if (err) return res.status(500).send("Erreur lors de l'écriture de l'utilisateur");
+      res.status(201).send("Utilisateur ajouté !");
+    });
+  });
+});
+
 
 // Démarrage du serveur sur le port spécifié
 app.listen(PORT, () => {
