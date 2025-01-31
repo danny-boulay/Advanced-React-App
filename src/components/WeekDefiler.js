@@ -1,6 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
+/*
+Utilisation de memo ici car quand je clickais sur "Afficher le point" 
+du HOC withMousePosition ça faisait appel à "Previous work day was: ..."
+*/
 
-function WeekDefiler() {
+const WeekDefiler = memo(function WeekDefiler() {
     // Fonction pour obtenir le jour actuel en format texte (ex: "Monday", "Tuesday", ...)
     const getCurrentDay = () => {
         const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -52,6 +56,6 @@ function WeekDefiler() {
             </button>
         </div>
     );
-}
+});
 
 export default WeekDefiler;

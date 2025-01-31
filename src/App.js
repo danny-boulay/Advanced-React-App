@@ -17,7 +17,7 @@ document.title = "My Advanced React App"; //titre de la tab bar du navigateur
 
 function App() {
   const [showPoint, setShowPoint] = useState(false);
-  
+
   return (
     <div className="App">
       <Header/>
@@ -25,11 +25,11 @@ function App() {
       <Money/>
       <WeekDefiler/>
       <div className="panel">
+        <PanelWithMouse />
+        {showPoint && <PointWithMouse />}
         <button onClick={() => setShowPoint(!showPoint)}>
           {showPoint ? "Masquer le point" : "Afficher le point"}
         </button>
-        <PanelWithMouse />
-        {showPoint && <PointWithMouse />}
       </div>
       <Newsletter/>
       <DessertsList/>
