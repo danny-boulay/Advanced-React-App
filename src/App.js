@@ -9,6 +9,7 @@ import Newsletter from './components/Newsletter';
 import withMousePosition from './components/withMousePosition'; //HOC
 import PanelMouseLogger from './components/PanelMouseLogger';
 import PointMouseLogger from './components/PointMouseLogger';
+import FeedbackForm from './components/FeedbackForm';
 
 const PanelWithMouse = withMousePosition(PanelMouseLogger);
 const PointWithMouse = withMousePosition(PointMouseLogger);
@@ -32,7 +33,8 @@ function App() {
           {showPoint ? "Masquer le point" : "Afficher le point"}
         </button>
       </div>
-      <Newsletter/>
+      <Newsletter />
+      <FeedbackForm/>
       <DessertsList/>
     </div>
   );
