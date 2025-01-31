@@ -141,3 +141,21 @@ button[disabled] {
   border-radius: 8px;
   text-align: center;
 }
+
+/*MousePosition*/
+.point {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.panel {
+  padding: 20px;
+  background: #eee;
+  border-radius: 8px;
+}
