@@ -144,12 +144,12 @@ button[disabled] {
 
 /*MousePosition*/
 .point {
-  position: fixed;
+  position: fixed; /* Le point sera fixé par rapport à la fenêtre */
   width: 10px;
   height: 10px;
   background-color: red;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Pour centrer le point par rapport à ses coordonnées */
   pointer-events: none;
   z-index: 9999;
 }

@@ -6,7 +6,7 @@ import CryptoCurrency from "./components/CryptoCurrency";
 import Money from './components/Money';
 import WeekDefiler from './components/WeekDefiler';
 import Newsletter from './components/Newsletter';
-import withMousePosition from './components/withMousePosition';
+import withMousePosition from './components/withMousePosition'; //HOC
 import PanelMouseLogger from './components/PanelMouseLogger';
 import PointMouseLogger from './components/PointMouseLogger';
 

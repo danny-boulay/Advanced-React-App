@@ -13,9 +13,13 @@ const WeekDefiler = memo(function WeekDefiler() {
         return days[(today + 6) % 7]; // L'astuce ici est de faire en sorte que dimanche (0) soit "Monday"
     };
 
+    // Déclare un état 'day' pour stocker le jour actuel de la semaine (l'état initial est défini avec 'getCurrentDay')
     const [day, setDay] = useState(getCurrentDay());
+
+    // Utilisation du custom hook 'usePrevious' pour mémoriser le jour précédent.
     const prevDay = usePrevious(day);
 
+    // Fonction qui met à jour le jour en fonction de l'état actuel.
     const getNextDay = () => {
         if (day === "Monday") {
             setDay("Tuesday")
@@ -34,10 +38,12 @@ const WeekDefiler = memo(function WeekDefiler() {
     function usePrevious(val) {
         const ref = useRef();
 
+        // useEffect met à jour la référence de la valeur chaque fois que 'val' change.
         useEffect(() => {
             ref.current = val;
         }, [val]);
 
+        // Retourne la valeur précédente de 'val'.
         return ref.current;
     }
 
